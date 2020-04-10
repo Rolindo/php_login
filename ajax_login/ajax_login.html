@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        用户名: <input type="text" name="username" id="userName">
+        密码：<input type="password" name="password" id="passWord">
+        <button>提交</button>
+    </form>
+    <script>
+        let userName = document.querySelector("#userName");
+        let passWord = document.querySelector("#passWord");
+        let btn = document.querySelector("button");
+        btn.onclick = function(event){
+            event.preventDefault();
+            let username = userName.value;
+            let password = passWord.value;
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST",'./ajax_login.php');
+            xhr.onload = function(){
+                console.log(xhr.responseText);
+            }
+            xhr.setRequestHeader("content-type",'application/x-www-form-urlencoded');
+            xhr.send(`username=${username}&password=${password}`);
+        }
+    </script>
+</body>
+</html>
